@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:shop/app/aap_text.dart';
+import 'package:shop/app/app_const.dart';
 import 'package:shop/app/app_images.dart';
+import 'package:shop/data/caching/cach_helper.dart';
 import 'package:shop/presention/screens/login.dart';
 import 'package:shop/presention/widgets/custom_veiw.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,6 +23,13 @@ class _OnBoardingState extends State<OnBoarding> {
   var pageControlle = PageController();
 
   bool isLast = false;
+  void submitt() {
+    CachHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      if (value) {
+        context.navigatAndRemove(const Login());
+      }
+    });
+  }
 
   List<CustomVeiw> boarding = [
     CustomVeiw(
@@ -44,7 +53,7 @@ class _OnBoardingState extends State<OnBoarding> {
       appBar: AppBar(
         actions: [
           TextButton(
-              onPressed: () {   context.navigatAndRemove(const Login());},
+              onPressed: submitt,
               child: Text(
                 'Skip',
                 style: TextStyle(color: AppColor.secondColor, fontSize: 18),
@@ -56,7 +65,6 @@ class _OnBoardingState extends State<OnBoarding> {
           Expanded(
               flex: 3,
               child: PageView.builder(
-                
                 itemCount: boarding.length,
                 controller: pageControlle,
                 onPageChanged: (i) {
@@ -97,9 +105,7 @@ class _OnBoardingState extends State<OnBoarding> {
             child: FloatingActionButton(
               onPressed: () {
                 if (isLast) {
-                  setState(() {
-                    context.navigatAndRemove(const Login());
-                  });
+                  submitt();
                 } else {
                   pageControlle.nextPage(
                       duration: const Duration(milliseconds: 760),
