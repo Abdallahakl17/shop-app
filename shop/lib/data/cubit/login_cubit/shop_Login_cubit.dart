@@ -1,11 +1,11 @@
-// ignore_for_file: missing_required_param
+// ignore_for_file: missing_required_param, file_names
 
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/app_const.dart';
 import 'package:shop/data/api/api_helper.dart';
-import 'package:shop/data/cubit/shop_state.dart';
+import 'package:shop/data/cubit/login_cubit/shop_login_state.dart';
 import 'package:shop/domain/login_model.dart';
 
 class ShopCubit extends Cubit<ShopState> {

@@ -17,10 +17,11 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(double.infinity, 30),
+        maximumSize: Size(double.infinity, 50),
         backgroundColor: color, // Button background color
         padding: const EdgeInsets.all(16.0), // Button padding
         shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
       child: Text(

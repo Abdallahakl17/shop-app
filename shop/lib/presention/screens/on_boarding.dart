@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:shop/app/aap_text.dart';
-import 'package:shop/app/app_const.dart';
 import 'package:shop/app/app_images.dart';
 import 'package:shop/data/caching/cach_helper.dart';
 import 'package:shop/presention/screens/login.dart';
 import 'package:shop/presention/widgets/custom_veiw.dart';
+import 'package:shop/presention/widgets/navigation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../app/app_color.dart';
@@ -118,19 +118,6 @@ class _OnBoardingState extends State<OnBoarding> {
         ],
       ),
     );
-  }
-}
-
-extension Navigat on BuildContext {
-  navigatTo(Widget screen) {
-    Navigator.push(this, MaterialPageRoute(builder: (context) => screen));
-  }
-}
-
-extension NavigatRemove on BuildContext {
-  navigatAndRemove(Widget screen) {
-    Navigator.pushAndRemoveUntil(this,
-        MaterialPageRoute(builder: (context) => screen), (route) => false);
   }
 }
 

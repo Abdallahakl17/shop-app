@@ -1,10 +1,15 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:shop/app/app_const.dart';
 import 'package:shop/app/them.dart';
 import 'package:shop/data/api/api_helper.dart';
 import 'package:shop/data/caching/cach_helper.dart';
 import 'package:shop/data/cubit/cubit_rev.dart';
+import 'package:shop/data/cubit/home_screen_cbuit/home_cubit.dart';
+import 'package:shop/data/cubit/login_cubit/shop_Login_cubit.dart';
 import 'package:shop/presention/screens/login.dart';
 import 'package:shop/presention/screens/main_screen.dart';
 import 'package:shop/presention/screens/on_boarding.dart';
@@ -18,8 +23,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await ApiHelper.intia();
   bool isBording = CachHelper.getDataPref(key: 'onBoarding');
-  var token = CachHelper.getDataPref(key: 'token');
-  print(token);
+   token = CachHelper.getDataPref(key: 'token');
   Widget? widget;
   if (isBording != null) {
     if (token != null) {
@@ -31,7 +35,8 @@ void main() async {
     widget = const OnBoarding();
   }
 
-  runApp(MyApp(
+  runApp(
+    MyApp(
     widgetStart: widget,
   ));
 }
@@ -47,7 +52,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightthemm(),
-      home: widgetStart,
+      home: MultiBlocProvider(
+      
+      providers: [
+        BlocProvider(create: (context)=>HomeCubit()..getData()),
+        BlocProvider(create: (context)=>ShopCubit()),
+      ],
+      child: widgetStart),
     );
   }
 }
